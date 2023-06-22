@@ -4,45 +4,45 @@
 #include <stdlib.h>
 
 /**
- * enum kind_e - Enumeration of card suits.
- * @SPADE: Spades suit.
- * @HEART: Hearts suit.
- * @CLUB: Clubs suit.
- * @DIAMOND: Diamonds suit.
+ * enum suit_e - Enumeration of card suits.
+ * @SPADES: Spades suit.
+ * @HEARTS: Hearts suit.
+ * @CLUBS: Clubs suit.
+ * @DIAMONDS: Diamonds suit.
  */
-typedef enum kind_e
+typedef enum suit_e
 {
-	SPADE = 0,
-	HEART,
-	CLUB,
-	DIAMOND
-} kind_t;
+    SPADES,
+    HEARTS,
+    CLUBS,
+    DIAMONDS
+} suit_t;
 
 /**
  * struct card_s - Playing card
  *
  * @value: Value of the card
  * From "Ace" to "King"
- * @kind: Kind of the card
+ * @suit: Suit of the card
  */
 typedef struct card_s
 {
-	const char *value;
-	const kind_t kind;
+    const char *value;
+    const suit_t suit;
 } card_t;
 
 /**
- * struct deck_node_s - Deck of card
+ * struct deck_node_s - Node in a deck of cards
  *
  * @card: Pointer to the card of the node
- * @prev: Pointer to the previous node of the list
- * @next: Pointer to the next node of the list
+ * @prev: Pointer to the previous node in the deck
+ * @next: Pointer to the next node in the deck
  */
 typedef struct deck_node_s
 {
-	const card_t *card;
-	struct deck_node_s *prev;
-	struct deck_node_s *next;
+    const card_t *card;
+    struct deck_node_s *prev;
+    struct deck_node_s *next;
 } deck_node_t;
 
 void sort_deck(deck_node_t **deck);
