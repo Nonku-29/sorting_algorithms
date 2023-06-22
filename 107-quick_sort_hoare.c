@@ -12,11 +12,11 @@ void quick_sort_hoare(int *array, size_t size);
  */
 void swap_ints(int *a, int *b)
 {
-	int tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+    if (a != b) {
+        *a ^= *b;
+        *b ^= *a;
+        *a ^= *b;
+    }
 }
 
 /**
@@ -34,26 +34,23 @@ void swap_ints(int *a, int *b)
  */
 int hoare_partition(int *array, size_t size, int left, int right)
 {
-	int pivot, above, below;
+    int pivot, i, j;
 
-	pivot = array[right];
-	for (above = left - 1, below = right + 1; above < below;)
-	{
-		do {
-			above++;
-		} while (array[above] < pivot);
-		do {
-			below--;
-		} while (array[below] > pivot);
+    pivot = array[right];
+    i = left - 1;
+    for (j = left; j <= right - 1; j++)
+    {
+        if (array[j] <= pivot)
+        {
+            i++;
+            swap_ints(&array[i], &array[j]);
+            print_array(array, size);
+        }
+    }
+    swap_ints(&array[i + 1], &array[right]);
+    print_array(array, size);
 
-		if (above < below)
-		{
-			swap_ints(array + above, array + below);
-			print_array(array, size);
-		}
-	}
-
-	return (above);
+    return (i + 1);
 }
 
 /**
@@ -67,14 +64,12 @@ int hoare_partition(int *array, size_t size, int left, int right)
  */
 void hoare_sort(int *array, size_t size, int left, int right)
 {
-	int part;
-
-	if (right - left > 0)
-	{
-		part = hoare_partition(array, size, left, right);
-		hoare_sort(array, size, left, part - 1);
-		hoare_sort(array, size, part, right);
-	}
+    if (left < right)
+    {
+        int part = hoare_partition(array, size, left, right);
+        hoare_sort(array, size, left, part - 1);
+        hoare_sort(array, size, part + 1, right);
+    }
 }
 
 /**
@@ -88,8 +83,8 @@ void hoare_sort(int *array, size_t size, int left, int right)
  */
 void quick_sort_hoare(int *array, size_t size)
 {
-	if (array == NULL || size < 2)
-		return;
+    if (array == NULL || size < 2)
+        return;
 
-	hoare_sort(array, size, 0, size - 1);
+    hoare_sort(array, size, 0, size - 1);
 }
