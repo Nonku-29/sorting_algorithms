@@ -1,3 +1,8 @@
+/**
+*Author: Nonku-29
+*Date and Time: 24 June 2023, 7:21 Am
+*/
+
 #include "deck.h"
 
 int _strcmp(const char *s1, const char *s2);
