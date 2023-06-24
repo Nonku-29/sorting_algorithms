@@ -1,3 +1,8 @@
+/**
+*Author: Nonku-29
+*Date and Time: 24 June 2023, 7:21 Am
+*/
+
 #include "sort.h"
 
 int get_max(int *array, int size);
